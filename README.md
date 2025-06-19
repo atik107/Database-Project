@@ -1,71 +1,46 @@
 # 🏥 Hospital Management System – DBMS Project
 
-## 📋 Overview
-
-This project is a **Database Management System (DBMS)** designed for managing hospital operations such as patient records, doctor assignments, medicine distribution, and billing using **Oracle SQL** and **PL/SQL**.
-
-It demonstrates the creation and manipulation of relational tables, use of PL/SQL for procedural operations, and database triggers for automating real-time tasks.
+## 📌 Project Description
+This project is a comprehensive **Database Management System (DBMS)** for a hospital, built using **Oracle SQL** and **PL/SQL**. It manages patients, doctors, medicines, billing, and their relationships, automating critical processes like billing and stock updates through triggers and stored procedures.
 
 ---
 
-## 🗂️ Project Structure
+## 🗃️ Database Schema
 
-### 🔹 Tables
-- `patient`: Stores patient information.
-- `doctor`: Stores doctor details.
-- `medicine`: Stores information about available medicines and their stock.
-- `bill`: Maintains billing details for patients.
-- `patient_doctor`: Associates patients with doctors (many-to-many).
-- `patient_medicine`: Tracks medicines assigned to patients.
-
-### 🔹 Relationships
-- `bill.patient_id → patient.patient_id`
-- `patient_doctor.patient_id → patient.patient_id`
-- `patient_doctor.doctor_id → doctor.doctor_id`
-- `patient_medicine.patient_id → patient.patient_id`
-- `patient_medicine.medicine_id → medicine.medicine_id`
+### 1. **Tables & Keys**
+| Table Name         | Description                          | Primary Key          | Foreign Keys                             |
+|--------------------|--------------------------------------|----------------------|-------------------------------------------|
+| `patient`          | Stores patient details               | `patient_id`         | –                                         |
+| `doctor`           | Stores doctor details                | `doctor_id`          | –                                         |
+| `medicine`         | Stores medicine info and stock       | `medicine_id`        | –                                         |
+| `bill`             | Stores billing information           | `bill_id`            | `patient_id → patient.patient_id`         |
+| `patient_doctor`   | Maps patients to doctors             | –                    | `patient_id`, `doctor_id` (both FKs)     |
+| `patient_medicine` | Maps patients to medicines           | –                    | `patient_id`, `medicine_id` (both FKs)   |
 
 ---
 
-## 💾 SQL Features Demonstrated
+## 🛠️ Core Features
 
-### ✅ Table Creation with Constraints
-- Primary keys
-- Foreign keys
+### ✅ Table Operations
+- Normalized structure with `PRIMARY` and `FOREIGN` keys
+- Data types chosen for scalability and integrity
 
-### ✅ DML Operations
-- `INSERT`, `SELECT`, `UPDATE`, `DELETE`
-- Use of `ROWTYPE` and `%TYPE`
+### ✅ PL/SQL Programs
+- **Anonymous blocks** for:
+  - Data retrieval
+  - Row-level manipulation
+  - Cursor iteration
+  - Conditional logic
+  - VARRAY usage
+- **Stored Procedure**: `update_stock(med_id, new_stock)`
 
 ### ✅ Triggers
-- `AFTER INSERT` trigger to auto-decrement medicine stock
-- `BEFORE INSERT` trigger to auto-calculate bill amount
-- `BEFORE INSERT` trigger to validate patient age
-
-### ✅ PL/SQL Blocks
-- Anonymous blocks for:
-  - Data insertion
-  - Row fetching
-  - Cursor iteration
-  - Arrays (VARRAY)
-  - IF/ELSE logic
-- Procedure to update medicine stock
+| Trigger Name          | Timing & Event      | Description                                      |
+|-----------------------|---------------------|--------------------------------------------------|
+| `update_stock`        | AFTER INSERT         | Decrements medicine stock on assigning to patient |
+| `calculate_bill_amount` | BEFORE INSERT       | Calculates bill as `SUM(stock) * 10`             |
+| `validate_age`        | BEFORE INSERT         | Restricts patient age between 0 and 150          |
 
 ---
 
-## 🚀 Sample PL/SQL Programs
-
-- **Insert a new medicine** with default values.
-- **Fetch and display** medicine details using `ROWTYPE`.
-- **Cursor-based loop** to show all medicines with row count.
-- **Array (VARRAY)** to manage and display a set of medicine names.
-- **Conditional (IF-ELSE)** block to categorize medicines.
-- **Stored procedure** to update stock based on ID.
-
----
-
-## ⚙️ Triggers Explained
-
-### 🧮 `update_stock` – Auto-update medicine stock
-```sql
-AFTER INSERT ON patient_medicine
+## 💻 Sample Outputs (PL/SQL)
