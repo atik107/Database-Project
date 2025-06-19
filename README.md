@@ -25,6 +25,10 @@ This project is a comprehensive **Database Management System (DBMS)** for a hosp
 - Normalized structure with `PRIMARY` and `FOREIGN` keys
 - Data types chosen for scalability and integrity
 
+  ### ✅ DML Operations
+- `INSERT`, `SELECT`, `UPDATE`, `DELETE`
+- Use of `ROWTYPE` and `%TYPE`
+
 ### ✅ PL/SQL Programs
 - **Anonymous blocks** for:
   - Data retrieval
