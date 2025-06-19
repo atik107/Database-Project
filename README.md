@@ -1,4 +1,4 @@
-# 🏥 Hospital Management System – DBMS Project
+# 🏥 Hospital Management System – RDBMS Project
 
 ## 📌 Project Description
 This project is a comprehensive **Database Management System (DBMS)** for a hospital, built using **Oracle SQL** and **PL/SQL**. It manages patients, doctors, medicines, billing, and their relationships, automating critical processes like billing and stock updates through triggers and stored procedures.
