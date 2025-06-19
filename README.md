@@ -45,6 +45,3 @@ This project is a comprehensive **Database Management System (DBMS)** for a hosp
 | `calculate_bill_amount` | BEFORE INSERT       | Calculates bill as `SUM(stock) * 10`             |
 | `validate_age`        | BEFORE INSERT         | Restricts patient age between 0 and 150          |
 
----
-
-## 💻 Sample Outputs (PL/SQL)
